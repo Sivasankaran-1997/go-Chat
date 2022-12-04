@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "serverstream/serverstream/proto";
+
+message ChatProto {
+
+     string ProtoSenderUser = 1;
+     string ProtoSenderEmail = 2;
+     string ProtoReceiverUser = 3;
+     string ProtoReceiverEmail = 4;
+     string ProtoMessage = 5;
+     string ProtoTime = 6;
+     string ProtoDate = 7;
+
+}
+
+message ProtoChatUserRequest {
+    string ProtoSenderEmail = 1;
+    string ProtoReceiverEmail = 2;
+}
+
+message ProtoChatUserReponse {
+    ChatProto res = 1;
+}
+
+service UserService{
+    rpc Chatting(ProtoChatUserRequest) returns (stream ProtoChatUserReponse);
+}
